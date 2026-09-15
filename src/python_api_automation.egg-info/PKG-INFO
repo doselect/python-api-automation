@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: python-api-automation
+Version: 0.1.0
+Summary: Pytest/RestAssured-style port of the serenity-rest-assured framework's structure and conventions (Salary Data API example service), plus a layered-framework port of doselect/do-api-automation.
+Requires-Python: >=3.10
+Requires-Dist: pytest>=7.4
+Requires-Dist: requests>=2.31
+Requires-Dist: pydantic>=2.5
+Requires-Dist: jsonschema>=4.20
+Requires-Dist: allure-pytest>=2.13
+Requires-Dist: pytest-html>=4.1
+Requires-Dist: pytest-xdist>=3.3
+Requires-Dist: pytest-ordering>=0.6
+Requires-Dist: bs4>=0.0.2
+Requires-Dist: pandas>=2.2
+Requires-Dist: Faker>=37.1

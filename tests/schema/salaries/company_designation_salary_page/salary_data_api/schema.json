@@ -1,0 +1,301 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": ["object","null"],
+  "properties": {
+    "meta": {
+      "type": "null"
+    },
+    "data": {
+      "type": ["object","null"],
+      "properties": {
+        "profileInfo": {
+          "type": ["object","null"],
+          "properties": {
+            "companyShortName": {
+              "type": ["string", "null"]
+            },
+            "profileName": {
+              "type": ["string", "null"]
+            },
+            "profileUrlName": {
+              "type": ["string", "null"]
+            },
+            "locationName": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "jobProfileGeneric": {
+              "type": ["boolean", "null"]
+            }
+          },
+          "required": [
+            "companyShortName",
+            "profileName",
+            "profileUrlName",
+            "locationName",
+            "jobProfileGeneric"
+          ]
+        },
+        "profileInsights": {
+          "type": ["object","null"],
+          "properties": {
+            "dataPoints": {
+              "type": ["integer","null"]
+            },
+            "minCtc": {
+              "type": ["number","null"]
+            },
+            "maxCtc": {
+              "type": ["number","null"]
+            },
+            "avgCtc": {
+              "type": ["number","null"]
+            }
+          },
+          "required": [
+            "dataPoints",
+            "minCtc",
+            "maxCtc",
+            "averageCtc"
+          ]
+        },
+        "summaryData": {
+          "type": ["object","null"],
+          "properties": {
+            "totalSalaryAverage": {
+              "type": ["string", "null"]
+            },
+            "totalSalaryDataPoints": {
+              "type": ["string", "null"]
+            },
+            "typicalMinCtc": {
+              "type": ["string", "null"]
+            },
+            "typicalMaxCtc": {
+              "type": ["string", "null"]
+            },
+            "lastUpdated": {
+              "type": ["string", "null"]
+            },
+            "minExp": {
+              "type": ["number","null"]
+            },
+            "maxExp": {
+              "type": ["number","null"]
+            },
+            "percentiles": {
+              "type": ["object","null"],
+              "properties": {
+                "75.0": {
+                  "type": ["string", "null"]
+                },
+                "10.0": {
+                  "type": ["string", "null"]
+                },
+                "90.0": {
+                  "type": ["string", "null"]
+                },
+                "25.0": {
+                  "type": ["string", "null"]
+                }
+              },
+              "required": [
+                "75.0",
+                "10.0",
+                "90.0",
+                "25.0"
+              ]
+            }
+          },
+          "required": [
+            "totalSalaryAverage",
+            "totalSalaryDataPoints",
+            "typicalMinCtc",
+            "typicalMaxCtc",
+            "lastUpdated",
+            "minExp",
+            "maxExp",
+            "percentiles"
+          ]
+        },
+        "ctcComparison": {
+          "type": ["object","null"],
+          "properties": {
+            "indiaRelativePercentage": {
+              "type": ["number","null"]
+            },
+            "industryRelativePercentage": {
+              "type": ["number","null"]
+            },
+            "avgIndiaCtc": {
+              "type": ["number","null"]
+            },
+            "avgIndustryCtc": {
+              "type": ["number","null"]
+            }
+          },
+          "required": [
+            "indiaRelativePercentage",
+            "industryRelativePercentage",
+            "avgIndiaCtc",
+            "avgIndustryCtc"
+          ]
+        },
+        "takeHomeSalary": {
+          "type": ["object","null"],
+          "properties": {
+            "min": {
+              "type": ["number","null"]
+            },
+            "max": {
+              "type": ["number","null"]
+            },
+            "label": {
+              "type": ["string", "null"]
+            }
+          },
+          "required": [
+            "min",
+            "max",
+            "label"
+          ]
+        },
+        "confidence": {
+          "type": ["string", "null"]
+        },
+        "experienceLevels": {
+          "type": "array",
+          "items": [
+            {
+              "type": ["object","null"],
+              "properties": {
+                "typicalMinCtc": {
+                  "type": ["integer","null"]
+                },
+                "typicalMaxCtc": {
+                  "type": ["integer","null"]
+                },
+                "avgCtc": {
+                  "type": ["integer","null"]
+                },
+                "minExp": {
+                  "type": ["integer","null"]
+                },
+                "maxExp": {
+                  "type": ["integer","null"]
+                },
+                "count": {
+                  "type": ["integer","null"]
+                }
+              },
+              "required": [
+                "typicalMinCtc",
+                "typicalMaxCtc",
+                "avgCtc",
+                "minExp",
+                "maxExp",
+                "count"
+              ]
+            }
+          ]
+        },
+        "breadcrumbs": {
+          "type": "array",
+          "items": [
+            {
+              "type": ["object","null"],
+              "properties": {
+                "text": {
+                  "type": ["string", "null"]
+                },
+                "path": {
+                  "type": ["string", "null"]
+                }
+              },
+              "required": [
+                "text",
+                "path"
+              ]
+            },
+            {
+              "type": ["object","null"],
+              "properties": {
+                "text": {
+                  "type": ["string", "null"]
+                },
+                "path": {
+                  "type": ["string", "null"]
+                }
+              },
+              "required": [
+                "text",
+                "path"
+              ]
+            },
+            {
+              "type": ["object","null"],
+              "properties": {
+                "text": {
+                  "type": ["string", "null"]
+                },
+                "path": {
+                  "type": ["string", "null"]
+                }
+              },
+              "required": [
+                "text",
+                "path"
+              ]
+            },
+            {
+              "type": ["object","null"],
+              "properties": {
+                "text": {
+                  "type": ["string", "null"]
+                },
+                "path": {
+                  "type": ["string", "null"]
+                }
+              },
+              "required": [
+                "text",
+                "path"
+              ]
+            },
+            {
+              "type": ["object","null"],
+              "properties": {
+                "text": {
+                  "type": ["string", "null"]
+                },
+                "path": {
+                  "type": ["string", "null"]
+                }
+              },
+              "required": [
+                "text",
+                "path"
+              ]
+            }
+          ]
+        }
+      },
+      "required": [
+        "profileInfo",
+        "profileInsights",
+        "summaryData",
+        "ctcComparison",
+        "takeHomeSalary",
+        "confidence",
+        "experienceLevels",
+        "breadcrumbs"
+      ]
+    }
+  },
+  "required": [
+    "meta",
+    "data"
+  ]
+}

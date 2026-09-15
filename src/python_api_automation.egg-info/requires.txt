@@ -1,0 +1,11 @@
+pytest>=7.4
+requests>=2.31
+pydantic>=2.5
+jsonschema>=4.20
+allure-pytest>=2.13
+pytest-html>=4.1
+pytest-xdist>=3.3
+pytest-ordering>=0.6
+bs4>=0.0.2
+pandas>=2.2
+Faker>=37.1

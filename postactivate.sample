@@ -1,0 +1,53 @@
+#!/bin/bash
+# API Configuration
+export BASE_URL='https://api.doselect.com' # replace according to your url
+export DOSELECT_API_KEY='' # Get from Team settings -> Integrations
+export DOSELECT_API_SECRET='' # Get from Team settings -> Integrations
+
+# Test Configuration
+export TEST_SLUG_RECRUIT='' # Fix a recruit test on the environment which has all problems
+export TEST_SLUG_LEARN='' # Fix a learn test on the environment which has all problems
+export CANDIDATE_EMAIL='' # candidate who has attempted above learn and recruit tests
+export PROBLEM_SLUG='' # Any coding problem which as been created and has been attempted by above candidate, and has multiple revisions
+
+# Domain Configuration
+export DOSELECT_PRIMARY_DOMAIN='' # Primary domain for DoSelect
+export DO_TEST_INTERFACE_DOMAIN='' # Test interface domain
+export DO_INTERVIEW_INTERFACE_DOMAIN='' # Interview interface domain
+export AUTH_URL='' # Authentication URL
+export WEBSOCKET_DOMAIN='' # Websocket domain
+
+# User Configuration
+export RECRUITER_EMAIL='' # Recruiter email for testing
+export ACCOUNT_TYPE='' # Account type (e.g., RECRUIT)
+export PRODUCT_TYPE='' # Product type (e.g., PLATFORM)
+export RECRUITER_USERNAME='' # Recruiter username
+export RECRUITER_PASSWORD='' # Recruiter password
+export ENVIRONMENT='' # Environment (e.g., PRODUCTION)
+export RECRUITER_ID= # Integer
+
+# Domain Configuration
+export DOSELECT_PRIMARY_DOMAIN='' # Primary domain for DoSelect
+export DO_TEST_INTERFACE_DOMAIN='' # Test interface domain
+export AUTH_URL='' # Authentication URL
+
+# Email Configuration
+export REPORT_SENDER_PASSWORD=''
+export REPORT_SENDER_EMAIL=''
+export AUTOMATION_EMAIL = ''
+export AUTOMATION_PASSWORD = ''
+
+# Legacy Configuration
+export DOLORES_BASE_URL=''
+
+export CREATOR_USERNAME=''
+export CREATOR_PASSWORD=''
+export CREATOR_EMAIL=''
+export REVIEWER_USERNAME=''
+export REVIEWER_PASSWORD=''
+export REVIEWER_EMAIL=''
+export MODERATOR_USERNAME=''
+export MODERATOR_PASSWORD=''
+export MODERATOR_EMAIL=''
+
+echo "Environment variables have been set successfully."

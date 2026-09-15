@@ -1,0 +1,12 @@
+postactivate*.sh
+postactivate*.ps1
+.venv
+venv
+reports
+allure-results
+allure-report
+.idea
+__pycache__
+logs
+report.html
+.pytest_cache

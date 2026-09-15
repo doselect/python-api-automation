@@ -1,0 +1,21 @@
+"""Mirrors tests/test_regression/test_recruit/test_add_remove_sections.py (do-api-automation)."""
+from __future__ import annotations
+
+import pytest
+
+from src.responses.recruit_response_handler import RecruitResponseHandler
+from tests.regression.recruit._creation_assessment_flow import run_creation_assessment_flow
+
+
+@pytest.mark.regression
+def test_add_remove_sections(recruit_response_handler: RecruitResponseHandler):
+    flow = run_creation_assessment_flow(recruit_response_handler)
+
+    recruit_response_handler.post_add_remove_section(flow["test_slug"])
+
+    res7 = recruit_response_handler.get_test_details(flow["test_slug"])
+    sections = res7["sections"]
+
+    recruit_response_handler.post_add_remove_section(
+        flow["test_slug"], action="delete", section_slug=sections[1]["slug"],
+    )
