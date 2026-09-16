@@ -200,7 +200,7 @@ class RecruitResponseHandler:
         get_company_details() call's `company_details` body directly (source read it back off
         `shared_data["company_details"]`, a stashed GET response).
         """
-        resolved_slug = company_slug or "doselect_performance_testing"
+        resolved_slug = company_slug or DOSELECT_COMPANY_SLUG
         params = {"__env": "PLT", "__user": RECRUITER_USERNAME}
         payload = patch_company_payload(company_details)
         response = execute_request(
@@ -232,7 +232,7 @@ class RecruitResponseHandler:
 
     def get_company_recruiters(self, company_slug: Optional[str] = None) -> dict[str, Any]:
         """Mirrors get_company_recruiters.py::get_company_recruiters(shared_data)."""
-        resolved_slug = company_slug or "doselect_performance_testing"
+        resolved_slug = company_slug or DOSELECT_COMPANY_SLUG
         params = {"__env": "PLT", "__user": RECRUITER_USERNAME}
         response = execute_request(
             self._spec_builder.company_recruiters_spec(), "GET", path_params={"companySlug": resolved_slug},
