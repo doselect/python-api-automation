@@ -1,31 +1,20 @@
 # python-api-automation
 
-A pytest-based Python port of this repository's Java/Serenity/RestAssured API automation
-framework — its structure and conventions — plus a full end-to-end port of the **Salary Data
-API** example service (`GET /company/{companyId}/jobProfile/{jobProfileId}/salaryData`), plus a
-full port of the separate **[doselect/do-api-automation](https://github.com/doselect/do-api-automation)**
-suite (DoSelect Recruit/Interview/Hacker/Contest/DOIQ/public APIs) into this same layered
-framework — see [do-api-automation port](#do-api-automation-port) below.
+A pytest-based Python port of the separate
+**[doselect/do-api-automation](https://github.com/doselect/do-api-automation)** suite (DoSelect
+Recruit/Interview/Hacker/Contest/DOIQ/public APIs) into a layered spec-builder/response-handler/
+model/test framework — see [do-api-automation port](#do-api-automation-port) below.
 
 This is a first-pass port, scoped deliberately narrow. It sits as a sibling of the existing Java
 project and does not touch it.
 
-## How this mirrors the Java framework
+## Framework building blocks
 
 | Java (`src/test/java/...`)                          | Python (`python-api-automation/...`)                              |
 |-------------------------------------------------------|---------------------------------------------------------------------|
 | `specs/BaseSpecBuilder`                                | `src/core/base_spec_builder.py`                                     |
 | `testutils/core/RestClient`                            | `src/core/rest_client.py`                                           |
-| `testutils/core/FileIOUtils`                           | `src/core/file_io_utils.py`                                         |
-| `constants/paths/SalariesAPIPath`                       | `src/constants/paths/salaries_api_path.py`                          |
 | `constants/headers/HeaderConstants`                     | `src/constants/headers/header_constants.py`                         |
-| `specs/SalariesSpecBuilder`                             | `src/specs/salaries_spec_builder.py`                                |
-| `responses/SalariesResponseHandler`                     | `src/responses/salaries_response_handler.py`                        |
-| `pojos/salaries/SalaryDataSummaryResponse`              | `src/models/salaries/salary_data_summary_response.py` (pydantic v2) |
-| `helpers/salaries/verifier/SalaryDataMinMaxAvgVerifier` | `src/helpers/salaries/verifier/salary_data_min_max_avg_verifier.py` (simple sanity check only) |
-| `tests/salaries/companydesignationsalary/SalaryDataAPITest` | `tests/salaries/companydesignationsalary/test_salary_data_api.py` |
-| `src/test/resources/data/salaries/commonSalaries.csv`   | `tests/data/salaries/common_salaries.csv` (byte-for-byte copy)      |
-| `src/test/resources/schema/.../Schema.json`             | `tests/schema/salaries/company_designation_salary_page/salary_data_api/schema.json` (byte-for-byte copy) |
 | `.agent/rules/serenity-api-automation-rules.md`         | `.agent/rules/python-api-automation-rules.md`                       |
 
 Reporting: Serenity's `Serenity.recordReportData()` tabular summary convention is mirrored via
@@ -56,52 +45,12 @@ pytest --html=report.html --self-contained-html
 
 Open `report.html` directly in a browser.
 
-## Scope
-
-**In scope (ported):**
-- Salary Data API: happy path (schema + 200), incorrect/negative companyId and jobProfileId,
-  response time (<600ms), Cache-Control header check, and the simple min ≤ avg ≤ max CTC sanity
-  check.
-- Framework building blocks: base spec builder, REST client (GET only), config-file reader,
-  path/header constants, spec builder, response handler, pydantic response model, report table
-  helper.
-
-**Out of scope for this first pass** (not ported — see module docstrings for pointers back to the
-Java originals):
-- The Metabase-driven random-sampling test (`validateJobProfileGenericInProfileInfo`).
-- The full offline-regression verifier logic in `SalaryDataMinMaxAvgVerifier`
-  (`verifyMinMaxAvgCtcWithOptionalOffline`, `SalaryDataComputationLogic`,
-  `OfflineSalaryDataFetcher`, `VerifierOptions`) — only the simple min/avg/max sanity check is
-  ported.
-- Auth token utilities (`GenerateAuthTokens`, `GenerateEmployerAuthToken`) — not needed since the
-  Salary Data GET endpoint requires no auth.
-- Employer annual-report reporting logic.
-- All other Salary-service endpoints in `SalariesSpecBuilder`/`SalariesResponseHandler` (Java)
-  beyond the Salary Data API (company salary data, meta, faq, top skills, latest salaries,
-  browse-salary pages, etc.) — only `SALARY_DATA` / `getSalaryData` / `getCxdSalaryData` are
-  ported.
-- `sampledSalaries.csv`-driven tests (`validateAverageCtcInBetweenTypicalMinMaxCtc...`,
-  `verifyMinMaxAvgCtcFromSalaryDataApi`) — that CSV was not part of this port's required data
-  files, so only `commonSalaries.csv` is included.
-- POST/PUT/DELETE/PATCH support in the REST client — only GET is needed for this endpoint.
-
-## Known quirk carried over from the copied schema
-
-`tests/schema/.../schema.json` was copied byte-for-byte per the porting rules and preserves an
-existing mismatch in the Java source file: `data.profileInsights.required` lists `"averageCtc"`,
-but the only CTC-average property actually defined under `data.profileInsights.properties` is
-`"avgCtc"`. This is not a Python-port bug — it is present in the original
-`src/test/resources/schema/salaries/CompanyDesignationSalaryPage/SalaryDataAPI/Schema.json` and
-was left untouched to satisfy the byte-for-byte copy requirement.
-
 ## do-api-automation port
 
-A second, independent port lives in this same repo: the whole of
-[doselect/do-api-automation](https://github.com/doselect/do-api-automation) (a flat, procedural
-pytest suite for DoSelect's Recruit/Interview/Hacker/Contest/DOIQ/AI-Interview/Content-Creator and
-public APIs) rebuilt into this repo's layered spec-builder/response-handler/model/test framework —
-the same conventions as the Salary Data API port above, extended to also cover session-cookie auth
-(not just the Salary port's no-auth GETs).
+The whole of [doselect/do-api-automation](https://github.com/doselect/do-api-automation) (a flat,
+procedural pytest suite for DoSelect's Recruit/Interview/Hacker/Contest/DOIQ/AI-Interview/
+Content-Creator and public APIs) rebuilt into this repo's layered spec-builder/response-handler/
+model/test framework, extended to also cover session-cookie auth.
 
 **Full file-by-file status:** [`DO_API_PORT_STATUS.md`](DO_API_PORT_STATUS.md) at the repo root
 tracks every source file's port status — this is the single source of truth for what's done.
@@ -112,7 +61,7 @@ in that file with the reasoning (see its `tests/flows/` and `utils/api_helper.py
 
 | do-api-automation                                    | python-api-automation                                              |
 |--------------------------------------------------------|----------------------------------------------------------------------|
-| `utils/api_helper.py::make_request`                     | `src/core/rest_client.py::execute_request` (generic HTTP-verb executor, additive alongside the Salary port's GET-only functions) |
+| `utils/api_helper.py::make_request`                     | `src/core/rest_client.py::execute_request` (generic HTTP-verb executor) |
 | `utils/config.py`                                       | `src/core/do_api_config.py`                                          |
 | `utils/generic_helpers.py`                               | `src/core/do_api_helpers.py`                                         |
 | `utils/logger.py`                                        | `src/core/do_api_logger.py`                                          |

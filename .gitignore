@@ -10,3 +10,4 @@ __pycache__
 logs
 report.html
 .pytest_cache
+*.egg-info

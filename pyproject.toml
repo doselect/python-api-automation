@@ -1,12 +1,11 @@
 [project]
 name = "python-api-automation"
 version = "0.1.0"
-description = "Pytest/RestAssured-style port of the serenity-rest-assured framework's structure and conventions (Salary Data API example service), plus a layered-framework port of doselect/do-api-automation."
+description = "Pytest/RestAssured-style layered-framework port of doselect/do-api-automation."
 requires-python = ">=3.10"
 dependencies = [
     "pytest>=7.4",
     "requests>=2.31",
-    "pydantic>=2.5",
     "jsonschema>=4.20",
     "allure-pytest>=2.13",
     "pytest-html>=4.1",
@@ -14,7 +13,6 @@ dependencies = [
     "pytest-xdist>=3.3",
     "pytest-ordering>=0.6",
     "bs4>=0.0.2",
-    "pandas>=2.2",
     "Faker>=37.1",
 ]
 
