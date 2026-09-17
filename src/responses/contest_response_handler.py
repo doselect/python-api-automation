@@ -559,24 +559,39 @@ class ContestResponseHandler:
         )
         return {"status_code": response.status_code}
 
+    def _post_test_section(self, contest_id, phase_detail: dict, action: str, section_slug: Optional[str]) -> requests.Response:
+        payload = (ADD_SECTION_PAYLOAD if action == "add" else DELETE_SECTION_PAYLOAD).copy()
+        if section_slug:
+            payload["section_slug"] = section_slug
+        payload["test_slug"] = phase_detail["context_slug"]
+        return execute_request(
+            self._spec_builder.test_section_spec(), "POST",
+            path_params={"contestId": contest_id}, query_params=_create_hackathon_contest_params(), body=payload,
+        )
+
     def post_add_remove_problem_section(self, action: str = "add", section_slug: Optional[str] = None) -> dict:
         """
         Mirrors post_add_remove_problem_section.py::post_add_remove_problem_section(shared_data,
         action, section_slug). Also returns the `section_slug` read off the phase fetched during
         this call, so a caller can thread it into a follow-up "delete" call the way the source
         threads `shared_data["section_slug"]`.
+
+        `get_latest_contest_id()` is a company-wide "most recent contest" pointer, not scoped to a
+        contest this call created itself — if it resolves to a stale/older contest (e.g. this test
+        runs before anything else has created one in this session), the section POST 404s. Retries
+        against a freshly-created contest on failure, matching the same idiom every other
+        phase-dependent `patch_*` method here already uses (see `patch_proctor_settings` etc.)
+        instead of asserting on the first, possibly-stale attempt.
         """
         contest_id = self.get_latest_contest_id()
         phase_detail = self.get_phase_details()
-        payload = (ADD_SECTION_PAYLOAD if action == "add" else DELETE_SECTION_PAYLOAD).copy()
-        if section_slug:
-            payload["section_slug"] = section_slug
-        payload["test_slug"] = phase_detail["context_slug"]
-        response = execute_request(
-            self._spec_builder.test_section_spec(), "POST",
-            path_params={"contestId": contest_id}, query_params=_create_hackathon_contest_params(), body=payload,
-            expected_status_code=202,
-        )
+        response = self._post_test_section(contest_id, phase_detail, action, section_slug)
+        if response.status_code != 202:
+            self.post_create_contest()
+            new_contest_id = self.get_latest_contest_id()
+            phase_detail = self.get_phase_details()
+            response = self._post_test_section(new_contest_id, phase_detail, action, section_slug)
+        assert response.status_code == 202, f"Expected status code 202, got {response.status_code}"
         return {"status_code": response.status_code, "section_slug": phase_detail.get("section_slug")}
 
     def post_clone_contest(self) -> dict:
