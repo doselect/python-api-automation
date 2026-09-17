@@ -103,3 +103,32 @@ pytest -m regression        # session-cookie-auth domains
 pytest -m public             # public_apis/* (API-key auth)
 pytest tests/regression/doiq tests/public_apis  # run specific domains directly
 ```
+
+## Jenkins
+
+API automation runs on Jenkins at **https://jenkins.chash.co/**, on the same `API-Automation` job
+do-api-automation uses: [https://jenkins.chash.co/job/QA/job/API-Automation/](https://jenkins.chash.co/job/QA/job/API-Automation/).
+
+To trigger a build, open the job and use **Build with Parameters**.
+
+| Parameter     | Description |
+|---------------|--------------|
+| **TAG_NAME**  | Pytest marker to run (e.g. `regression`, `smoke`, `public`). Same as `pytest -m <tag>`. |
+| **ENVIRONMENT** | `PRODUCTION` or `DEVELOPMENT` — selects `postactivate-prod.sh` or `postactivate-dev.sh` (which targets stg3 in this repo). |
+| **RERUN**     | Whether to rerun failed tests after the initial run (`pytest --last-failed`). Defaults to `true`. |
+
+The pipeline (`Jenkinsfile`) checks out the repo, creates a venv and installs `requirements.txt`,
+then runs `test.sh`, which:
+
+1. Stashes the previous build's Allure `history/` so trend charts carry over between runs.
+2. Runs the initial `pytest -n auto -m "$TAG_NAME"` pass.
+3. Optionally reruns only the failed tests (`RERUN=true`).
+4. Merges both runs into one consolidated Allure report plus a single-file HTML report.
+5. Emails the report (CSV summary + single-file HTML) to the opted-in recipients in
+   `reporting/email_list.csv`, via `send_email_report.py`.
+
+- **Allure**: published from `reports/` by the Allure Jenkins Plugin, and the single-file HTML
+  report is also published via the HTML Publisher plugin as a fallback.
+- **Credentials**: `postactivate-prod.sh`/`postactivate-dev.sh` are gitignored and must already
+  exist on the Jenkins agent with real values filled in (placed there manually, not part of this
+  repo's checkout) — same approach as do-api-automation.

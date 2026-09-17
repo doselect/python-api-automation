@@ -5,6 +5,10 @@ venv
 reports
 allure-results
 allure-report
+allure-report-initial
+allure-report-rerun
+allure-report-single
+temp
 .idea
 __pycache__
 logs

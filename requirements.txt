@@ -1,0 +1,10 @@
+pytest==9.1.1
+pytest-html==4.2.0
+pytest-xdist==3.8.0
+pytest-ordering==0.6
+requests==2.34.2
+jsonschema==4.26.0
+allure-pytest==2.16.0
+bs4==0.0.2
+Faker==40.38.0
+pandas==2.2.3

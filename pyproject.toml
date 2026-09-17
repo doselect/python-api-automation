@@ -14,6 +14,9 @@ dependencies = [
     "pytest-ordering>=0.6",
     "bs4>=0.0.2",
     "Faker>=37.1",
+    # Jenkins email-report step (src/reporting/send_email_report.py) — CSV filtering for the
+    # attached test-summary CSV and the recipient list.
+    "pandas>=2.2",
 ]
 
 [tool.pytest.ini_options]
