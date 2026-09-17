@@ -87,7 +87,11 @@ fi
 # STEP 3: INITIAL RUN & SUMMARY
 # =====================================================
 echo "================ INITIAL RUN ================"
-pytest -n auto -m "$TAG" --alluredir="$INITIAL_RESULTS" || true
+# --dist=loadgroup: normal load-balanced parallel distribution, except tests carrying the same
+# xdist_group marker (assigned in tests/regression/conftest.py::pytest_collection_modifyitems --
+# the contest domain and the shared-OTP-mailbox tests) always land on the same worker, so they
+# never race each other under -n auto.
+pytest -n auto --dist=loadgroup -m "$TAG" --alluredir="$INITIAL_RESULTS" || true
 
 # Essential for send_email_report.py (initial_stats)
 allure generate "$INITIAL_RESULTS" --clean -o "allure-report-initial"

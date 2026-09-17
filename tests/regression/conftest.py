@@ -48,6 +48,35 @@ def pytest_addoption(parser):
     )
 
 
+def pytest_collection_modifyitems(items: list) -> None:
+    """
+    Serializes two groups of tests against each other under parallel execution (pytest-xdist's
+    `-n auto`/`--dist=loadgroup`), without reducing parallelism for anything else:
+
+    - `regression/contest/*`: every test resolves "the contest to operate on" via
+      `get_latest_contest_id()` (a company-wide "most recent contest" GET, not scoped to the test's
+      own creation — see `ContestResponseHandler.get_latest_contest_id`). Under real parallel
+      workers this races: one worker's contest gets superseded or mutated by another's before the
+      first worker's own follow-up call runs, producing exactly the "Contest is not in draft
+      state" / assorted 500s seen in practice.
+    - The two tests that poll the shared `AUTOMATION_EMAIL` Gmail inbox for a "DoSelect Email
+      Verification" OTP (`test_instant_interview_login_as_interviewer.py`,
+      `test_email_otp_reading.py`): running concurrently, one worker can consume the OTP email
+      meant for the other.
+
+    `--dist=loadgroup` (set in test.sh) keeps its normal load-balanced distribution for every test
+    that ISN'T in one of these groups; grouped tests just always land on the same worker.
+    """
+    for item in items:
+        path = str(item.fspath).replace("\\", "/")
+        if "/regression/contest/" in path:
+            item.add_marker(pytest.mark.xdist_group(name="contest"))
+        elif path.endswith("test_instant_interview_login_as_interviewer.py") or path.endswith(
+            "test_email_otp_reading.py"
+        ):
+            item.add_marker(pytest.mark.xdist_group(name="otp_mailbox"))
+
+
 @pytest.fixture(scope="function")
 def shared_data() -> dict:
     return {}
