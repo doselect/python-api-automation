@@ -56,6 +56,55 @@ class ContentCreatorSpecBuilder:
             headers=headers,
         )
 
+    def _problem_page_spec(self, base_path: str, problem_slug: str) -> RequestSpec:
+        """Default content-creator headers with `referer` pointed at the problem page (as the dashboard sends)."""
+        headers = default_content_creator_headers(self._creator_auth_manager)
+        headers["referer"] = f"{content_creator_api_path.set_base_url()}/creator/problem/{problem_slug}"
+        return build_request_spec(
+            base_url=content_creator_api_path.set_base_url(), base_path=base_path, headers=headers,
+        )
+
+    def _creator_spec(self, base_path: str) -> RequestSpec:
+        """Plain default content-creator headers for `base_path`."""
+        return build_request_spec(
+            base_url=content_creator_api_path.set_base_url(), base_path=base_path,
+            headers=default_content_creator_headers(self._creator_auth_manager),
+        )
+
+    def problem_comment_list_spec(self) -> RequestSpec:
+        return self._creator_spec(content_creator_api_path.PROBLEM_COMMENT_LIST)
+
+    def problem_testcase_list_spec(self) -> RequestSpec:
+        return self._creator_spec(content_creator_api_path.PROBLEM_TESTCASE_LIST)
+
+    def creator_stats_getter_spec(self) -> RequestSpec:
+        return self._creator_spec(content_creator_api_path.CREATOR_STATS_GETTER)
+
+    def tag_search_spec(self) -> RequestSpec:
+        return self._creator_spec(content_creator_api_path.TAG_SEARCH)
+
+    def mcq_upload_bulk_spec(self, multipart: bool = False) -> RequestSpec:
+        """Bulk MCQ upload. The file step is multipart, so its JSON content-type header is dropped."""
+        spec = self._creator_spec(content_creator_api_path.MCQ_UPLOAD_BULK)
+        if multipart:
+            spec.headers.pop("content-type", None)
+        return spec
+
+    def problem_solution_status_spec(self, problem_slug: str) -> RequestSpec:
+        return self._problem_page_spec(content_creator_api_path.PROBLEM_SOLUTION_STATUS, problem_slug)
+
+    def code_stub_configuration_spec(self, problem_slug: str) -> RequestSpec:
+        return self._problem_page_spec(content_creator_api_path.CODE_STUB_CONFIGURATION, problem_slug)
+
+    def online_plagiarism_data_spec(self, problem_slug: str) -> RequestSpec:
+        return self._problem_page_spec(content_creator_api_path.ONLINE_PLAGIARISM_DATA, problem_slug)
+
+    def problem_check_spec(self, problem_slug: str) -> RequestSpec:
+        return self._problem_page_spec(content_creator_api_path.PROBLEM_CHECK, problem_slug)
+
+    def generate_solution_spec(self, problem_slug: str) -> RequestSpec:
+        return self._problem_page_spec(content_creator_api_path.GENERATE_SOLUTION, problem_slug)
+
     def moderation_set_status_spec(self) -> RequestSpec:
         """Mirrors patch_problem_reviewer.py/post_set_problem_status_reviewer.py's headers (default reviewer headers)."""
         return build_request_spec(

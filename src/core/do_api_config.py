@@ -58,6 +58,8 @@ MODERATOR_PASSWORD = os.environ.get("MODERATOR_PASSWORD")
 MODERATOR_EMAIL = os.environ.get("MODERATOR_EMAIL")
 AUTOMATION_EMAIL = os.environ.get("AUTOMATION_EMAIL")
 AUTOMATION_PASSWORD = os.environ.get("AUTOMATION_PASSWORD")
+# "up" (default) runs the AI-service-up content tests; "down" runs the AI-service-down ones instead.
+AI_SOLUTION_SERVICE = os.environ.get("AI_SOLUTION_SERVICE", "up")
 
 USER_TYPE_RECRUITER = "recruiter"
 USER_TYPE_CANDIDATE = "hacker"
