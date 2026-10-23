@@ -2,7 +2,7 @@ postactivate*.sh
 postactivate*.ps1
 .venv
 venv
-reports
+/reports
 allure-results
 allure-report
 allure-report-initial

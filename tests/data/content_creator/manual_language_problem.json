@@ -1,0 +1,184 @@
+{
+  "description": {
+    "description": "<h2>Problem summary</h2><p>An iOS application may receive duplicate notifications for the same event. Given a list of notification IDs, count how many notifications are duplicates. An ID is considered a duplicate if it has appeared previously in the list.</p><p><br></p><h2>Input format</h2><p>A single line containing an integer <code style=\"background-color: rgb(240, 240, 240);\">N</code>, followed by <code style=\"background-color: rgb(240, 240, 240);\">N</code> integers representing notification IDs.</p><p><br></p><h2>Output format</h2><p>Print the total number of duplicate notifications.</p><p><br></p><h2>Constraints</h2><ul><li>1\u2264N\u22641051 \\le N \\le 10^5</li><li>1\u2264N\u2264105</li><li>1\u2264ID\u22641091 \\le ID \\le 10^9</li><li>1\u2264ID\u2264109</li></ul><p><br></p>"
+  },
+  "settings": {
+    "solving_time": "10",
+    "technologies": [
+      "/api/v1/technology/swift",
+      "/api/v1/technology/bash",
+      "/api/v1/technology/clojure",
+      "/api/v1/technology/rust",
+      "/api/v1/technology/mars-assembler32"
+    ],
+    "tags": [
+      "Key Components",
+      "Verified"
+    ],
+    "insight_tags": [
+      "Key Components",
+      "Verified"
+    ]
+  },
+  "edited_stubs": {
+    "extra_data": {
+      "code_stub_type": "User-Modified",
+      "dexter": {
+        "cache": "",
+        "database": ""
+      },
+      "flags": {
+        "ignore_space": false
+      },
+      "is_cmp_problem": false,
+      "is_genAI_problem": false,
+      "samplecode": {
+        "code": "",
+        "language": ""
+      },
+      "seedscript": {
+        "code": "",
+        "language": ""
+      },
+      "testcase_runner": ""
+    },
+    "code_stub_generator": {
+      "created": "2026-10-23T07:32:51.901Z",
+      "data": {},
+      "languages": [],
+      "modified": "2026-10-23T07:34:30.367Z",
+      "modified_stubs": [
+        "mars-assembler32"
+      ]
+    },
+    "stubs": {
+      "bash": {
+        "code": {
+          "body": "# Enter your code here. Read input from STDIN. Print output to STDOUT",
+          "head": "",
+          "tail": ""
+        },
+        "stub_type": "Default"
+      },
+      "clojure": {
+        "code": {
+          "body": "; Enter your code here. Read input from STDIN. Print output to STDOUT",
+          "head": "",
+          "tail": ""
+        },
+        "stub_type": "Default"
+      },
+      "mars-assembler32": {
+        "stub_type": "User-Modified",
+        "code": {
+          "head": "",
+          "body": ".data\r\nprompt: .asciiz \"Enter N: \"\r\nresult_msg: .asciiz \"Duplicate count: \"\r\nnewline: .asciiz \"\\n\"\r\nids: .space 400000\r\n\r\n.text\r\n.globl main\r\n\r\nmain:\r\n    # Read N\r\n    li $v0, 5\r\n    syscall\r\n    move $s0, $v0          # N\r\n\r\n    la $s1, ids             # Array base address\r\n    li $t0, 0               # i = 0\r\n\r\nread_loop:\r\n    beq $t0, $s0, count_start\r\n    li $v0, 5\r\n    syscall\r\n    sll $t1, $t0, 2\r\n    add $t2, $s1, $t1\r\n    sw $v0, 0($t2)\r\n    addi $t0, $t0, 1\r\n    j read_loop\r\n\r\ncount_start:\r\n    li $s2, 0               # duplicate count\r\n    li $t0, 0               # i = 0\r\n\r\nouter_loop:\r\n    beq $t0, $s0, print_result\r\n    sll $t1, $t0, 2\r\n    add $t2, $s1, $t1\r\n    lw $t3, 0($t2)          # current ID\r\n\r\n    li $t4, 0               # j = 0\r\n\r\ninner_loop:\r\n    beq $t4, $t0, next_i\r\n    sll $t5, $t4, 2\r\n    add $t6, $s1, $t5\r\n    lw $t7, 0($t6)\r\n\r\n    beq $t3, $t7, found_duplicate\r\n    addi $t4, $t4, 1\r\n    j inner_loop\r\n\r\nfound_duplicate:\r\n    addi $s2, $s2, 1\r\n    j next_i\r\n\r\nnext_i:\r\n    addi $t0, $t0, 1\r\n    j outer_loop\r\n\r\nprint_result:\r\n    move $a0, $s2\r\n    li $v0, 1\r\n    syscall\r\n\r\n    li $v0, 10\r\n    syscall",
+          "tail": ""
+        }
+      },
+      "rust": {
+        "code": {
+          "body": "// Enter your code here. Read input from STDIN. Print output to STDOUT",
+          "head": "",
+          "tail": ""
+        },
+        "stub_type": "Default"
+      },
+      "swift": {
+        "code": {
+          "body": "// Enter your code here. Read input from STDIN. Print output to STDOUT",
+          "head": "",
+          "tail": ""
+        },
+        "stub_type": "Default"
+      }
+    }
+  },
+  "default_stubs": {
+    "stubs": {
+      "bash": {
+        "code": {
+          "body": "# Enter your code here. Read input from STDIN. Print output to STDOUT",
+          "head": "",
+          "tail": ""
+        },
+        "stub_type": "Default"
+      },
+      "clojure": {
+        "code": {
+          "body": "; Enter your code here. Read input from STDIN. Print output to STDOUT",
+          "head": "",
+          "tail": ""
+        },
+        "stub_type": "Default"
+      },
+      "mars-assembler32": {
+        "stub_type": "Default",
+        "code": {
+          "head": "",
+          "body": ".data\nuserinput:  .space 20 # reserve space to store user's input\n\n.text\nmain:\n\n# getting user's input\nli $v0,8\nla $a0, userinput\nli $a1, 20\nsyscall\n\n# display user's input on console\nli $v0,4\nla $a0, userinput\nsyscall\n\n# code for program end\nli $v0,10\nsyscall",
+          "tail": ""
+        }
+      },
+      "rust": {
+        "code": {
+          "body": "// Enter your code here. Read input from STDIN. Print output to STDOUT",
+          "head": "",
+          "tail": ""
+        },
+        "stub_type": "Default"
+      },
+      "swift": {
+        "code": {
+          "body": "// Enter your code here. Read input from STDIN. Print output to STDOUT",
+          "head": "",
+          "tail": ""
+        },
+        "stub_type": "Default"
+      }
+    },
+    "code_stub_generator": {
+      "created": "2026-10-23T07:32:51.901Z",
+      "data": {},
+      "languages": [],
+      "modified": "2026-10-23T07:33:39.799Z",
+      "modified_stubs": []
+    }
+  },
+  "sample_solution": {
+    "sample_solutions": {
+      "mars-assembler32": {
+        "solution": ".data\nids: .space 400000\n\n.text\n.globl main\n\nmain:\n    li $v0, 5\n    syscall\n    move $s0, $v0\n\n    la $s1, ids\n    li $t0, 0\n\nread_loop:\n    beq $t0, $s0, count_start\n    li $v0, 5\n    syscall\n    sll $t1, $t0, 2\n    add $t2, $s1, $t1\n    sw $v0, 0($t2)\n    addi $t0, $t0, 1\n    j read_loop\n\ncount_start:\n    li $s2, 0\n    li $t0, 0\n\nouter_loop:\n    beq $t0, $s0, print_result\n\n    sll $t1, $t0, 2\n    add $t2, $s1, $t1\n    lw $t3, 0($t2)\n\n    li $t4, 0\n\ninner_loop:\n    beq $t4, $t0, next_i\n\n    sll $t5, $t4, 2\n    add $t6, $s1, $t5\n    lw $t7, 0($t6)\n\n    beq $t3, $t7, found_duplicate\n    addi $t4, $t4, 1\n    j inner_loop\n\nfound_duplicate:\n    addi $s2, $s2, 1\n    j next_i\n\nnext_i:\n    addi $t0, $t0, 1\n    j outer_loop\n\nprint_result:\n    move $a0, $s2\n    li $v0, 1\n    syscall\n\n    li $v0, 10\n    syscall",
+        "solution_type": "User-Modified"
+      }
+    }
+  },
+  "testcases": [
+    {
+      "name": "Testcase #1",
+      "input": "5\n1\n2\n1\n3\n2",
+      "output": "2",
+      "weight": 1,
+      "is_sample": false
+    },
+    {
+      "name": "Testcase #2",
+      "input": "5\n10\n20\n30\n40\n50",
+      "output": "0",
+      "weight": 1,
+      "is_sample": false
+    },
+    {
+      "name": "Testcase #3",
+      "input": "7\n1\n2\n1\n3\n2\n1\n4",
+      "output": "3",
+      "weight": 0,
+      "is_sample": true
+    }
+  ],
+  "sockmeta": {
+    "connid": "123456789",
+    "wid": "nimbus",
+    "sockid": "raG11auGy4Hrmn7pAAAj"
+  }
+}

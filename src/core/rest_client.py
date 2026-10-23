@@ -87,6 +87,7 @@ def execute_request(
     path_params: Optional[dict[str, Any]] = None,
     body: Optional[Any] = None,
     expected_status_code: Optional[int] = None,
+    files: Optional[dict[str, Any]] = None,
 ) -> requests.Response:
     """
     Method-agnostic counterpart to execute_get_request, added for the do-api-automation port —
@@ -94,13 +95,17 @@ def execute_request(
     PUT/DELETE. `body` falls back to `spec.body` when omitted (matching how a spec-builder can
     carry a default payload). Status is asserted only when `expected_status_code` is given, so
     callers needing an unasserted call can omit it (mirrors the *_without_status_assertion methods
-    above).
+    above). `files` sends a multipart upload instead of a JSON body (the spec must then omit content-type,
+    so `requests` can set the multipart boundary).
     """
     url = _resolve_url(spec, path_params)
     effective_body = body if body is not None else spec.body
+    payload_log = f"files: {list(files)}" if files else (
+        json_module.dumps(effective_body, indent=2) if effective_body else "None"
+    )
     allure.attach(
         f"URL: {url}\nMethod: {method}\nHeaders: {json_module.dumps(spec.headers, indent=2)}\n"
-        f"Payload: {json_module.dumps(effective_body, indent=2) if effective_body else 'None'}",
+        f"Payload: {payload_log}",
         name="API Request",
         attachment_type=allure.attachment_type.TEXT,
     )
@@ -108,7 +113,8 @@ def execute_request(
         method,
         url,
         params=_merged_query_params(spec, query_params),
-        json=effective_body,
+        json=None if files else effective_body,
+        files=files,
         headers=spec.headers,
         timeout=spec.timeout_ms / 1000,
     )

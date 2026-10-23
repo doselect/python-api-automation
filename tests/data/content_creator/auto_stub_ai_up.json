@@ -1,0 +1,206 @@
+{
+  "description": {
+    "description": "<h2>Problem summary</h2><p>An iOS application may receive duplicate notifications for the same event. Given a list of notification IDs, count how many notifications are duplicates. An ID is considered a duplicate if it has appeared previously in the list.</p><p><br></p><h2>Input format</h2><p>A single line containing an integer <code style=\"background-color: rgb(240, 240, 240);\">N</code>, followed by <code style=\"background-color: rgb(240, 240, 240);\">N</code> integers representing notification IDs.</p><p><br></p><h2>Output format</h2><p>Print the total number of duplicate notifications.</p><p><br></p><h2>Constraints</h2><ul><li>1\u2264N\u22641051 \\le N \\le 10^5</li><li>1\u2264N\u2264105</li><li>1\u2264ID\u22641091 \\le ID \\le 10^9</li><li>1\u2264ID\u2264109</li></ul><p><br></p>"
+  },
+  "settings": {
+    "solving_time": "10",
+    "technologies": [
+      "/api/v1/technology/csharp",
+      "/api/v1/technology/rust",
+      "/api/v1/technology/c",
+      "/api/v1/technology/cpp",
+      "/api/v1/technology/java7",
+      "/api/v1/technology/python2",
+      "/api/v1/technology/java8",
+      "/api/v1/technology/python3",
+      "/api/v1/technology/cpp14",
+      "/api/v1/technology/php8",
+      "/api/v1/technology/java21"
+    ],
+    "tags": [
+      "Key Components",
+      "Verified"
+    ],
+    "insight_tags": [
+      "Key Components",
+      "Verified"
+    ]
+  },
+  "auto_stubs": {
+    "extra_data": {
+      "code_stub_type": "Auto-Generated",
+      "dexter": {
+        "cache": "",
+        "database": ""
+      },
+      "flags": {
+        "ignore_space": false
+      },
+      "is_cmp_problem": false,
+      "is_genAI_problem": false,
+      "samplecode": {
+        "code": "",
+        "language": ""
+      },
+      "seedscript": {
+        "code": "",
+        "language": ""
+      },
+      "testcase_runner": ""
+    },
+    "code_stub_generator": {
+      "created": "2026-10-22T06:37:19.451Z",
+      "data": {
+        "functionName": "countDuplicates",
+        "functionParams": [
+          {
+            "name": "notificationIds",
+            "type": "INTEGER ARRAY"
+          }
+        ],
+        "functionReturnType": "INTEGER"
+      },
+      "languages": [
+        "c",
+        "cpp",
+        "cpp14",
+        "csharp",
+        "java21",
+        "java7",
+        "java8",
+        "javascript",
+        "php7",
+        "php8",
+        "python3"
+      ],
+      "modified": "",
+      "modified_stubs": []
+    },
+    "stubs": {
+      "c": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "#include <assert.h>\n#include <ctype.h>\n#include <limits.h>\n#include <math.h>\n#include <stdbool.h>\n#include <stddef.h>\n#include <stdint.h>\n#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nchar* readline();\nchar* ltrim(char*);\nchar* rtrim(char *);\n\nint parse_int(char*);\n",
+          "body": "\n/*\n * Complete the 'countDuplicates' function below.\n * \n * The function is expected to return an INTEGER.\n * The function accepts INTEGER ARRAY notificationIds as parameter.\n * \n */\n\nint countDuplicates(int notificationIds_count, int* notificationIds) {\n\t// Write your code here\n\t\n\t\n\t\n}\n",
+          "tail": "int main() {\n\n\tint notificationIds_count = parse_int(ltrim(rtrim(readline())));\n\n\tint* notificationIds = malloc(notificationIds_count * sizeof(int));\n\n\tfor (int i = 0; i < notificationIds_count; i++) {\n\t\tint notificationIds_item = parse_int(ltrim(rtrim(readline())));\n\n\t\t*(notificationIds + i) = notificationIds_item;\n\t}\n\tint result = countDuplicates(notificationIds_count, notificationIds);\n\n\tprintf(\"%d\", result);\n\n\treturn 0;\n}\n\nchar* readline() {\n\tsize_t alloc_length = 1024;\n\tsize_t data_length = 0;\n\n\tchar* data = malloc(alloc_length);\n\n\twhile (true) {\n\t\tchar* cursor = data + data_length;\n\t\tchar* line = fgets(cursor, alloc_length - data_length, stdin);\n\n\t\tif (!line) {\n\t\t\tbreak;\n\t\t}\n\n\t\tdata_length += strlen(cursor);\n\n\t\tif (data_length < alloc_length - 1 || data[data_length - 1] == '\\n') {\n\t\t\tbreak;\n\t\t}\n\n\t\talloc_length <<= 1;\n\n\t\tdata = realloc(data, alloc_length);\n\n\t\tif (!data) {\n\t\t\tdata = '\\0';\n\n\t\t\tbreak;\n\t\t}\n\t}\n\n\tif (data[data_length - 1] == '\\n') {\n\t\tdata[data_length - 1] = '\\0';\n\n\t\tdata = realloc(data, data_length);\n\n\t\tif (!data) {\n\t\t\tdata = '\\0';\n\t\t}\n\t} else {\n\t\tdata = realloc(data, data_length + 1);\n\n\t\tif (!data) {\n\t\t\tdata = '\\0';\n\t\t} else {\n\t\t\tdata[data_length] = '\\0';\n\t\t}\n\t}\n\n\treturn data;\n}\n\nchar* ltrim(char* str) {\n\tif (!str) {\n\t\treturn '\\0';\n\t}\n\n\tif (!*str) {\n\t\treturn str;\n\t}\n\n\twhile (*str != '\\0' && isspace(*str)) {\n\t\tstr++;\n\t}\n\n\treturn str;\n}\n\nchar* rtrim(char* str) {\n\tif (!str) {\n\t\treturn '\\0';\n\t}\n\n\tif (!*str) {\n\t\treturn str;\n\t}\n\n\tchar* end = str + strlen(str) - 1;\n\n\twhile (end >= str && isspace(*end)) {\n\t\tend--;\n\t}\n\n\t*(end + 1) = '\\0';\n\n\treturn str;\n}\n\nint parse_int(char* str) {\n\tchar* endptr;\n\tint value = strtol(str, &endptr, 10);\n\n\tif (endptr == str || *endptr != '\\0') {\n\t\texit(EXIT_FAILURE);\n\t}\n\n\treturn value;\n}"
+        }
+      },
+      "cpp": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "#include <bits/stdc++.h>\n\nusing namespace std;\n\nstring ltrim(const string &);\nstring rtrim(const string &);\n",
+          "body": "\n/*\n * Complete the 'countDuplicates' function below.\n * \n * The function is expected to return an INTEGER.\n * The function accepts INTEGER ARRAY notificationIds as parameter.\n * \n */\n\nint countDuplicates(vector<int> notificationIds) {\n\t// Write your code here\n\t\n\t\n\t\n}\n",
+          "tail": "int main() {\n\n\tstring notificationIds_count_temp;\n\tgetline(cin, notificationIds_count_temp);\n\n\tint notificationIds_count = stoi(ltrim(rtrim(notificationIds_count_temp)));\n\n\tvector<int> notificationIds(notificationIds_count);\n\n\tfor (int i = 0; i < notificationIds_count; i++) {\n\t\tstring notificationIds_item_temp;\n\t\tgetline(cin, notificationIds_item_temp);\n\n\t\tint notificationIds_item = stoi(ltrim(rtrim(notificationIds_item_temp))); \n\n\t\tnotificationIds[i] = notificationIds_item;\n\t}\n\n\tint result = countDuplicates(notificationIds);\n\n\tcout << result;\n\n\treturn 0;\n}\n\nstring ltrim(const string &str) {\n\tstring s(str);\n\n\ts.erase(\n\t\ts.begin(),\n\t\tfind_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))\n\t);\n\n\treturn s;\n}\n\nstring rtrim(const string &str) {\n\tstring s(str);\n\n\ts.erase(\n\t\tfind_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),\n\t\ts.end()\n\t);\n\n\treturn s;\n}"
+        }
+      },
+      "cpp14": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "#include <bits/stdc++.h>\n\nusing namespace std;\n\nstring ltrim(const string &);\nstring rtrim(const string &);\n",
+          "body": "\n/*\n * Complete the 'countDuplicates' function below.\n * \n * The function is expected to return an INTEGER.\n * The function accepts INTEGER ARRAY notificationIds as parameter.\n * \n */\n\nint countDuplicates(vector<int> notificationIds) {\n\t// Write your code here\n\t\n\t\n\t\n}\n",
+          "tail": "int main() {\n\n\tstring notificationIds_count_temp;\n\tgetline(cin, notificationIds_count_temp);\n\n\tint notificationIds_count = stoi(ltrim(rtrim(notificationIds_count_temp)));\n\n\tvector<int> notificationIds(notificationIds_count);\n\n\tfor (int i = 0; i < notificationIds_count; i++) {\n\t\tstring notificationIds_item_temp;\n\t\tgetline(cin, notificationIds_item_temp);\n\n\t\tint notificationIds_item = stoi(ltrim(rtrim(notificationIds_item_temp))); \n\n\t\tnotificationIds[i] = notificationIds_item;\n\t}\n\n\tint result = countDuplicates(notificationIds);\n\n\tcout << result;\n\n\treturn 0;\n}\n\nstring ltrim(const string &str) {\n\tstring s(str);\n\n\ts.erase(\n\t\ts.begin(),\n\t\tfind_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))\n\t);\n\n\treturn s;\n}\n\nstring rtrim(const string &str) {\n\tstring s(str);\n\n\ts.erase(\n\t\tfind_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),\n\t\ts.end()\n\t);\n\n\treturn s;\n}"
+        }
+      },
+      "csharp": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "using System.CodeDom.Compiler;\nusing System.Collections.Generic;\nusing System.Collections;\nusing System.ComponentModel;\nusing System.Diagnostics.CodeAnalysis;\nusing System.Globalization;\nusing System.IO;\nusing System.Linq;\nusing System.Reflection;\nusing System.Runtime.Serialization;\nusing System.Text.RegularExpressions;\nusing System.Text;\nusing System;\n",
+          "body": "\nclass Result {\n\n\t/*\n\t * Complete the 'countDuplicates' function below.\n\t * \n\t * The function is expected to return an INTEGER.\n\t * The function accepts INTEGER ARRAY notificationIds as parameter.\n\t * \n\t */\n\n\tpublic static int countDuplicates(List<int> notificationIds) {\n\t\t// Write your code here\n\t\t\n\t\t\n\t}\n}\n",
+          "tail": "public class Source {\n\tpublic static void Main(string[] args) {\n\t\tint notificationIdsCount = Convert.ToInt32(Console.ReadLine().Trim());\n\n\t\tList<int> notificationIds = new List<int>();\n\t\t\n\t\tfor (int i = 0; i < notificationIdsCount; i++) {\n\t\t\tint notificationIdsItem = Convert.ToInt32(Console.ReadLine().Trim());\n\t\t\tnotificationIds.Add(notificationIdsItem);\n\t\t}\n\n\t\tint result = Result.countDuplicates(notificationIds);\n\n\t\tConsole.WriteLine(result);\n\t}\n}"
+        }
+      },
+      "java21": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "import java.io.*;\nimport java.math.*;\nimport java.security.*;\nimport java.text.*;\nimport java.util.*;\nimport java.util.concurrent.*;\nimport java.util.function.*;\nimport java.util.regex.*;\nimport java.util.stream.*;\nimport static java.util.stream.Collectors.joining;\nimport static java.util.stream.Collectors.toList;\n",
+          "body": "\nclass Result {\n\n\t/*\n\t * Complete the 'countDuplicates' function below.\n\t * \n\t * The function is expected to return an INTEGER.\n\t * The function accepts INTEGER ARRAY notificationIds as parameter.\n\t * \n\t */\n\n\n\tpublic static int countDuplicates(List<Integer> notificationIds) {\n\t\t// Write your code here\n\t\t\n\t\t\n\t}\n}\n",
+          "tail": "public class Source {\n\tpublic static void main(String[] args) throws IOException {\n\t\tBufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));\n\t\tint notificationIdsCount = Integer.parseInt(bufferedReader.readLine().trim());\n\n\t\tList<Integer> notificationIds = IntStream.range(0, notificationIdsCount).mapToObj(i -> {\n\t\t\ttry {\n\t\t\t\treturn bufferedReader.readLine().replaceAll(\"\\\\s+$\", \"\");\n\t\t\t} catch (IOException ex) {\n\t\t\t\tthrow new RuntimeException(ex);\n\t\t\t}\n\t\t})\n\t\t\t.map(String::trim)\n\t\t\t.map(Integer::parseInt)\n\t\t\t.collect(toList());\n\n\t\tint result = Result.countDuplicates(notificationIds);\n\n\t\tSystem.out.print(String.valueOf(result));\n\n\t\tbufferedReader.close();\t}\n}"
+        }
+      },
+      "java7": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "import java.io.*;\nimport java.math.*;\nimport java.security.*;\nimport java.text.*;\nimport java.util.*;\nimport java.util.concurrent.*;\nimport java.util.regex.*;\n",
+          "body": "\nclass Result {\n\n\t/*\n\t * Complete the 'countDuplicates' function below.\n\t * \n\t * The function is expected to return an INTEGER.\n\t * The function accepts INTEGER ARRAY notificationIds as parameter.\n\t * \n\t */\n\n\n\tpublic static int countDuplicates(List<Integer> notificationIds) {\n\t\t// Write your code here\n\t\t\n\t\t\n\t}\n}\n",
+          "tail": "public class Source {\n\tpublic static void main(String[] args) throws IOException {\n\t\tBufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));\n\t\tint notificationIdsCount = Integer.parseInt(bufferedReader.readLine().trim());\n\n\t\tList<Integer> notificationIds = new ArrayList<>();\n\t\t\n\t\tfor (int i = 0; i < notificationIdsCount; i++) {\n\t\t\tint notificationIdsItem = Integer.parseInt(bufferedReader.readLine().trim());\n\t\t\tnotificationIds.add(notificationIdsItem);\n\t\t}\n\n\t\tint result = Result.countDuplicates(notificationIds);\n\n\t\tSystem.out.print(String.valueOf(result));\n\n\t\tbufferedReader.close();\t}\n}"
+        }
+      },
+      "java8": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "import java.io.*;\nimport java.math.*;\nimport java.security.*;\nimport java.text.*;\nimport java.util.*;\nimport java.util.concurrent.*;\nimport java.util.function.*;\nimport java.util.regex.*;\nimport java.util.stream.*;\nimport static java.util.stream.Collectors.joining;\nimport static java.util.stream.Collectors.toList;\n",
+          "body": "\nclass Result {\n\n\t/*\n\t * Complete the 'countDuplicates' function below.\n\t * \n\t * The function is expected to return an INTEGER.\n\t * The function accepts INTEGER ARRAY notificationIds as parameter.\n\t * \n\t */\n\n\n\tpublic static int countDuplicates(List<Integer> notificationIds) {\n\t\t// Write your code here\n\t\t\n\t\t\n\t}\n}\n",
+          "tail": "public class Source {\n\tpublic static void main(String[] args) throws IOException {\n\t\tBufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));\n\t\tint notificationIdsCount = Integer.parseInt(bufferedReader.readLine().trim());\n\n\t\tList<Integer> notificationIds = IntStream.range(0, notificationIdsCount).mapToObj(i -> {\n\t\t\ttry {\n\t\t\t\treturn bufferedReader.readLine().replaceAll(\"\\\\s+$\", \"\");\n\t\t\t} catch (IOException ex) {\n\t\t\t\tthrow new RuntimeException(ex);\n\t\t\t}\n\t\t})\n\t\t\t.map(String::trim)\n\t\t\t.map(Integer::parseInt)\n\t\t\t.collect(toList());\n\n\t\tint result = Result.countDuplicates(notificationIds);\n\n\t\tSystem.out.print(String.valueOf(result));\n\n\t\tbufferedReader.close();\t}\n}"
+        }
+      },
+      "javascript": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "'use strict';\n\nprocess.stdin.resume();\nprocess.stdin.setEncoding('utf-8');\n\nlet inputString = '';\nlet currentLine = 0;\n\nprocess.stdin.on('data', function(inputStdin) {\n\tinputString += inputStdin;\n});\n\nprocess.stdin.on('end', function() {\n\tinputString = inputString.split('\\n');\n\n\tmain();\n});\n\nfunction readLine() {\n\treturn inputString[currentLine++];\n}\n\n",
+          "body": "\n/*\n * Complete the 'countDuplicates' function below.\n * \n * The function is expected to return an INTEGER.\n * The function accepts INTEGER ARRAY notificationIds as parameter.\n * \n */\n\nfunction countDuplicates(notificationIds) {\n\t// Write your code here\n\t\n\t\n}\n",
+          "tail": "function main() {\n\tconst notificationIdsCount = parseInt(readLine().trim(), 10);\n\n\tlet notificationIds = [];\n\n\tfor (let i = 0; i < notificationIdsCount; i++) {\n\t\tconst notificationIdsItem = parseInt(readLine().trim(), 10);\n\t\tnotificationIds.push(notificationIdsItem);\n\t}\n\n\tconst result = countDuplicates(notificationIds)\n\n\tconsole.log(result)\n}\n"
+        }
+      },
+      "php7": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "<?php\nfunction readLineValue() {\n\treturn trim(fgets(STDIN));\n}\n\n",
+          "body": "\n\n/*\n * Complete the 'countDuplicates' function below.\n */\n\nfunction countDuplicates($notificationIds) {\n\t// Write your code here\n}\n",
+          "tail": "$notificationIdsCount = intval(readLineValue());\n$notificationIds = [];\nfor ($i = 0; $i < $notificationIdsCount; $i++) {\n\t$notificationIds[] = intval(readLineValue());\n}\n\n\n\n$result = countDuplicates($notificationIds);\necho $result;\n?>"
+        }
+      },
+      "php8": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "<?php\nfunction readLineValue() {\n\treturn trim(fgets(STDIN));\n}\n\n",
+          "body": "\n\n/*\n * Complete the 'countDuplicates' function below.\n */\n\nfunction countDuplicates($notificationIds) {\n\t// Write your code here\n}\n",
+          "tail": "$notificationIdsCount = intval(readLineValue());\n$notificationIds = [];\nfor ($i = 0; $i < $notificationIdsCount; $i++) {\n\t$notificationIds[] = intval(readLineValue());\n}\n\n\n\n$result = countDuplicates($notificationIds);\necho $result;\n?>"
+        }
+      },
+      "python3": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "#!/bin/python3\n\nimport math\nimport os\nimport random\nimport re\nimport sys",
+          "body": "\n#\n# Complete the 'countDuplicates' function below.\n# \n# The function is expected to return an INTEGER.\n# The function accepts INTEGER ARRAY notificationIds as parameter.\n#\n\ndef countDuplicates(notificationIds):\n\t# Write your code here\n\t\n\t\n",
+          "tail": "if __name__ == '__main__':\n\tnotificationIds_count = int(input().strip())\n\n\tnotificationIds = []\n\n\tfor _ in range(notificationIds_count):\n\t\tnotificationIds_item = int(input().strip())\n\t\tnotificationIds.append(notificationIds_item)\n\n\tresult = countDuplicates(notificationIds)\n\n\tprint(str(result))\n"
+        }
+      }
+    }
+  },
+  "sample_solution": {
+    "sample_solutions": {
+      "cpp": {
+        "solution": "\n/*\n * Complete the 'countDuplicates' function below.\n * \n * The function is expected to return an INTEGER.\n * The function accepts INTEGER ARRAY notificationIds as parameter.\n * \n */\n\nint countDuplicates(vector<int> notificationIds) {\n    unordered_set<int> seen;\n    int duplicates = 0;\n\n    for (int id : notificationIds) {\n        if (!seen.insert(id).second) {\n            duplicates++;\n        }\n    }\n\n    return duplicates;\n}\n",
+        "solution_type": "User-Modified"
+      }
+    }
+  },
+  "testcases": [
+    {
+      "name": "Testcase #1",
+      "input": "6\n10\n20\n10\n30\n20\n40",
+      "output": "2",
+      "weight": 1,
+      "is_sample": false
+    },
+    {
+      "name": "Testcase #2",
+      "input": "5\n1\n2\n3\n4\n5",
+      "output": "0",
+      "weight": 1,
+      "is_sample": false
+    },
+    {
+      "name": "Testcase #3",
+      "input": "6\n10\n20\n10\n30\n20\n40",
+      "output": "2",
+      "weight": 0,
+      "is_sample": true
+    }
+  ],
+  "sockmeta": {
+    "connid": "123456789",
+    "wid": "nimbus",
+    "sockid": "LNi6KxQLVf5KdcEWAAAH"
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "description": {
+    "description": "<h2>1. Problem statement</h2><p>Given three integers <code>A</code>, <code>B</code>, and <code>C</code>, find the largest number among them and print it.</p><p>If two or more numbers have the same maximum value, print that value.</p><p><br></p><h2>2. Input format</h2><p>A single line containing three space-separated integers <code>A</code>, <code>B</code>, and <code>C</code>.</p><p><br></p><h2>3. Output format</h2><p>Print a single integer representing the largest of the three numbers.</p><p><br></p><h2>4. Constraints</h2><pre class=\"ql-syntax\" spellcheck=\"false\">-10^9 &lt;= A, B, C &lt;= 10^9\n</pre><p><br></p>"
+  },
+  "technologies": {
+    "technologies": [
+      "/api/v1/technology/cpp",
+      "/api/v1/technology/cpp14",
+      "/api/v1/technology/java21",
+      "/api/v1/technology/java7",
+      "/api/v1/technology/python3",
+      "/api/v1/technology/typescript",
+      "/api/v1/technology/mars-assembler32"
+    ],
+    "solving_time": "10"
+  },
+  "tags": {
+    "tags": [
+      "Key Components",
+      "Verified"
+    ],
+    "insight_tags": [
+      "Ansible Inventory Management"
+    ]
+  },
+  "auto_stubs": {
+    "extra_data": {
+      "dexter": {
+        "cache": "",
+        "database": ""
+      },
+      "flags": {
+        "ignore_space": false
+      },
+      "is_cmp_problem": false,
+      "is_genAI_problem": false,
+      "samplecode": {
+        "code": "",
+        "language": ""
+      },
+      "seedscript": {
+        "code": "",
+        "language": ""
+      },
+      "testcase_runner": "",
+      "code_stub_type": "Auto-Generated"
+    },
+    "code_stub_generator": {
+      "created": "2026-10-19T11:07:14.340Z",
+      "data": {
+        "functionName": "countDuplicates",
+        "functionReturnType": "LONG INTEGER 2D ARRAY",
+        "functionParams": [
+          {
+            "name": "notificationIds",
+            "type": "STRING 2D ARRAY"
+          }
+        ]
+      },
+      "languages": [
+        "cpp",
+        "cpp14",
+        "java21",
+        "java7",
+        "python3",
+        "typescript"
+      ],
+      "modified": "",
+      "modified_stubs": []
+    },
+    "stubs": {
+      "cpp": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "#include <bits/stdc++.h>\n\nusing namespace std;\n\nstring ltrim(const string &);\nstring rtrim(const string &);\nvector<string> split(const string &);\n",
+          "body": "\n/*\n * Complete the 'countDuplicates' function below.\n * \n * The function is expected to return an LONG INTEGER 2D ARRAY.\n * The function accepts STRING 2D ARRAY notificationIds as parameter.\n * \n */\n\nvector<vector<long>> countDuplicates(vector<vector<string>> notificationIds) {\n\t// Write your code here\n\t\n\t\n\t\n}\n",
+          "tail": "int main() {\n\n\tstring notificationIds_rows_temp;\n\tgetline(cin, notificationIds_rows_temp);\n\n\tint notificationIds_rows = stoi(ltrim(rtrim(notificationIds_rows_temp)));\n\n\tstring notificationIds_columns_temp;\n\tgetline(cin, notificationIds_columns_temp);\n\n\tint notificationIds_columns = stoi(ltrim(rtrim(notificationIds_columns_temp)));\n\n\tvector<vector<string>> notificationIds(notificationIds_rows);\n\n\tfor (int i = 0; i < notificationIds_rows; i++) {\n\t\tnotificationIds[i].resize(notificationIds_columns);\n\n\t\tstring notificationIds_row_temp_temp;\n\t\tgetline(cin, notificationIds_row_temp_temp);\n\n\t\tvector<string> notificationIds_row_temp = split(rtrim(notificationIds_row_temp_temp));\n\n\t\tfor (int j = 0; j < notificationIds_columns; j++) {\n\t\t\tstring notificationIds_row_item = notificationIds_row_temp[j];\n\n\t\t\tnotificationIds[i][j] = notificationIds_row_item;\n\t\t}\n\t}\n\n\tvector<vector<long>> result = countDuplicates(notificationIds);\n\n\tfor (int i = 0; i < result.size(); i++) {\n\t\tfor (int j = 0; j < result[i].size(); j++) {\n\t\t\tcout << result[i][j];\n\n\t\t\tif (j != result[i].size() - 1) {\n\t\t\t\tcout << \" \";\n\t\t\t}\n\t\t}\n\n\t\tif (i != result.size() - 1) {\n\t\t\tcout << \"\\n\";\n\t\t}\n\t}\n\n\treturn 0;\n}\n\nstring ltrim(const string &str) {\n\tstring s(str);\n\n\ts.erase(\n\t\ts.begin(),\n\t\tfind_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))\n\t);\n\n\treturn s;\n}\n\nstring rtrim(const string &str) {\n\tstring s(str);\n\n\ts.erase(\n\t\tfind_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),\n\t\ts.end()\n\t);\n\n\treturn s;\n}\n\nvector<string> split(const string &str) {\n\tvector<string> tokens;\n\n\tstring::size_type start = 0;\n\tstring::size_type end = 0;\n\n\twhile ((end = str.find(\" \", start)) != string::npos) {\n\t\ttokens.push_back(str.substr(start, end - start));\n\n\t\tstart = end + 1;\n\t}\n\n\ttokens.push_back(str.substr(start));\n\n\treturn tokens;\n}"
+        }
+      },
+      "cpp14": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "#include <bits/stdc++.h>\n\nusing namespace std;\n\nstring ltrim(const string &);\nstring rtrim(const string &);\nvector<string> split(const string &);\n",
+          "body": "\n/*\n * Complete the 'countDuplicates' function below.\n * \n * The function is expected to return an LONG INTEGER 2D ARRAY.\n * The function accepts STRING 2D ARRAY notificationIds as parameter.\n * \n */\n\nvector<vector<long>> countDuplicates(vector<vector<string>> notificationIds) {\n\t// Write your code here\n\t\n\t\n\t\n}\n",
+          "tail": "int main() {\n\n\tstring notificationIds_rows_temp;\n\tgetline(cin, notificationIds_rows_temp);\n\n\tint notificationIds_rows = stoi(ltrim(rtrim(notificationIds_rows_temp)));\n\n\tstring notificationIds_columns_temp;\n\tgetline(cin, notificationIds_columns_temp);\n\n\tint notificationIds_columns = stoi(ltrim(rtrim(notificationIds_columns_temp)));\n\n\tvector<vector<string>> notificationIds(notificationIds_rows);\n\n\tfor (int i = 0; i < notificationIds_rows; i++) {\n\t\tnotificationIds[i].resize(notificationIds_columns);\n\n\t\tstring notificationIds_row_temp_temp;\n\t\tgetline(cin, notificationIds_row_temp_temp);\n\n\t\tvector<string> notificationIds_row_temp = split(rtrim(notificationIds_row_temp_temp));\n\n\t\tfor (int j = 0; j < notificationIds_columns; j++) {\n\t\t\tstring notificationIds_row_item = notificationIds_row_temp[j];\n\n\t\t\tnotificationIds[i][j] = notificationIds_row_item;\n\t\t}\n\t}\n\n\tvector<vector<long>> result = countDuplicates(notificationIds);\n\n\tfor (int i = 0; i < result.size(); i++) {\n\t\tfor (int j = 0; j < result[i].size(); j++) {\n\t\t\tcout << result[i][j];\n\n\t\t\tif (j != result[i].size() - 1) {\n\t\t\t\tcout << \" \";\n\t\t\t}\n\t\t}\n\n\t\tif (i != result.size() - 1) {\n\t\t\tcout << \"\\n\";\n\t\t}\n\t}\n\n\treturn 0;\n}\n\nstring ltrim(const string &str) {\n\tstring s(str);\n\n\ts.erase(\n\t\ts.begin(),\n\t\tfind_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))\n\t);\n\n\treturn s;\n}\n\nstring rtrim(const string &str) {\n\tstring s(str);\n\n\ts.erase(\n\t\tfind_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),\n\t\ts.end()\n\t);\n\n\treturn s;\n}\n\nvector<string> split(const string &str) {\n\tvector<string> tokens;\n\n\tstring::size_type start = 0;\n\tstring::size_type end = 0;\n\n\twhile ((end = str.find(\" \", start)) != string::npos) {\n\t\ttokens.push_back(str.substr(start, end - start));\n\n\t\tstart = end + 1;\n\t}\n\n\ttokens.push_back(str.substr(start));\n\n\treturn tokens;\n}"
+        }
+      },
+      "java21": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "import java.io.*;\nimport java.math.*;\nimport java.security.*;\nimport java.text.*;\nimport java.util.*;\nimport java.util.concurrent.*;\nimport java.util.function.*;\nimport java.util.regex.*;\nimport java.util.stream.*;\nimport static java.util.stream.Collectors.joining;\nimport static java.util.stream.Collectors.toList;\n",
+          "body": "\nclass Result {\n\n\t/*\n\t * Complete the 'countDuplicates' function below.\n\t * \n\t * The function is expected to return an LONG INTEGER 2D ARRAY.\n\t * The function accepts STRING 2D ARRAY notificationIds as parameter.\n\t * \n\t */\n\n\n\tpublic static List<List<Long>> countDuplicates(List<List<String>> notificationIds) {\n\t\t// Write your code here\n\t\t\n\t\t\n\t}\n}\n",
+          "tail": "public class Source {\n\tpublic static void main(String[] args) throws IOException {\n\t\tBufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));\n\t\tint notificationIdsRows = Integer.parseInt(bufferedReader.readLine().trim());\n\t\tint notificationIdsColumns = Integer.parseInt(bufferedReader.readLine().trim());\n\n\t\tList<List<String>> notificationIds = new ArrayList<>();\n\n\t\tIntStream.range(0, notificationIdsRows).forEach(i -> {\n\t\t\ttry {\n\t\t\t\tnotificationIds.add(\n\t\t\t\t\tStream.of(bufferedReader.readLine().replaceAll(\"\\\\s+$\", \"\").split(\" \"))\n\t\t\t\t\t\t.collect(toList())\n\t\t\t\t\t);\n\t\t\t} catch (IOException ex) {\n\t\t\t\t\tthrow new RuntimeException(ex);\n\t\t\t}\n\t\t});\n\n\t\tList<List<Long>> result = Result.countDuplicates(notificationIds);\n\n\t\tresult.stream()\n\t\t\t\t.map(\n\t\t\t\t\tr -> r.stream()\n\t\t\t\t\t\t\t.map(Object::toString)\n\t\t\t\t\t\t\t.collect(joining(\" \"))\n\t\t\t\t)\n\t\t\t\t.map(r -> r + \"\\n\")\n\t\t\t\t.collect(toList())\n\t\t\t\t.forEach(e -> {\n\t\t\t\t\ttry {\n\t\t\t\t\t\tSystem.out.print(e);\n\t\t\t\t\t} catch (Exception ex) {\n\t\t\t\t\t\tthrow new RuntimeException(ex);\n\t\t\t\t\t}\n\t\t\t\t});\n\n\t\tbufferedReader.close();\t}\n}"
+        }
+      },
+      "java7": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "import java.io.*;\nimport java.math.*;\nimport java.security.*;\nimport java.text.*;\nimport java.util.*;\nimport java.util.concurrent.*;\nimport java.util.regex.*;\n",
+          "body": "\nclass Result {\n\n\t/*\n\t * Complete the 'countDuplicates' function below.\n\t * \n\t * The function is expected to return an LONG INTEGER 2D ARRAY.\n\t * The function accepts STRING 2D ARRAY notificationIds as parameter.\n\t * \n\t */\n\n\n\tpublic static List<List<Long>> countDuplicates(List<List<String>> notificationIds) {\n\t\t// Write your code here\n\t\t\n\t\t\n\t}\n}\n",
+          "tail": "public class Source {\n\tpublic static void main(String[] args) throws IOException {\n\t\tBufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));\n\t\tint notificationIdsRows = Integer.parseInt(bufferedReader.readLine().trim());\n\t\tint notificationIdsColumns = Integer.parseInt(bufferedReader.readLine().trim());\n\n\t\tList<List<String>> notificationIds = new ArrayList<>();\n\n\t\tfor (int i = 0; i < notificationIdsRows; i++) {\n\t\t\tnotificationIds.add(Arrays.asList(bufferedReader.readLine().replaceAll(\"\\\\s+$\", \"\").split(\" \")));\n\t\t}\n\n\t\tList<List<Long>> result = Result.countDuplicates(notificationIds);\n\n\t\tfor (int i = 0; i < result.size(); i++) {\n\t\t\tfor (int j = 0; j < result.get(i).size(); j++) {\n\t\t\t\tSystem.out.print(String.valueOf(result.get(i).get(j)));\n\t\t\t\tif (j != result.get(i).size() - 1) {\n\t\t\t\t\tSystem.out.print(\" \");\n\t\t\t\t}\n\t\t\t}\n\t\t\tif (i != result.size() - 1) {\n\t\t\t\tSystem.out.print(\"\\n\");\n\t\t\t}\n\t\t}\n\n\t\tbufferedReader.close();\t}\n}"
+        }
+      },
+      "python3": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "#!/bin/python3\n\nimport math\nimport os\nimport random\nimport re\nimport sys",
+          "body": "\n#\n# Complete the 'countDuplicates' function below.\n# \n# The function is expected to return an LONG INTEGER 2D ARRAY.\n# The function accepts STRING 2D ARRAY notificationIds as parameter.\n#\n\ndef countDuplicates(notificationIds):\n\t# Write your code here\n\t\n\t\n",
+          "tail": "if __name__ == '__main__':\n\tnotificationIds_rows = int(input().strip())\n\tnotificationIds_columns = int(input().strip())\n\n\tnotificationIds = []\n\n\tfor _ in range(notificationIds_rows):\n\t\tnotificationIds_item = input().rstrip().split()\n\t\tnotificationIds.append(notificationIds_item)\n\n\tresult = countDuplicates(notificationIds)\n\n\tprint('\\n'.join([' '.join(map(str, x)) for x in result]))\n"
+        }
+      },
+      "typescript": {
+        "stub_type": "Auto-Generated",
+        "code": {
+          "head": "'use strict';\n\nprocess.stdin.resume();\nprocess.stdin.setEncoding('utf-8');\n\nlet inputString: any = '';\nlet currentLine = 0;\n\nprocess.stdin.on('data', function(inputStdin: string): void {\n\tinputString += inputStdin;\n});\n\nprocess.stdin.on('end', function(): void {\n\tinputString = inputString.split('\\n');\n\n\tmain();\n});\n\nfunction readLine(): string {\n\treturn inputString[currentLine++];\n}\n\n",
+          "body": "\n/*\n * Complete the 'countDuplicates' function below.\n * \n * The function is expected to return an LONG INTEGER 2D ARRAY.\n * The function accepts STRING 2D ARRAY notificationIds as parameter.\n * \n */\n\nfunction countDuplicates(notificationIds: string[][]): number[][] {\n\t// Write your code here\n\t\n\t\n}\n",
+          "tail": "function main(): void {\n\tconst notificationIdsRows = parseInt(readLine().trim(), 10);\n\n\tconst notificationIdsColumns = parseInt(readLine().trim(), 10);\n\n\tlet notificationIds = Array(notificationIdsRows);\n\n\tfor (let i = 0; i < notificationIdsRows; i++) {\n\t\tnotificationIds[i] = readLine().replace(/\\s+$/g, '').split(' ');\n\t}\n\n\tconst result = countDuplicates(notificationIds)\n\n\tconsole.log(result.map(x => x.join(' ')).join('\\n'))\n}\n"
+        }
+      }
+    }
+  },
+  "sample_solution": {
+    "sample_solutions": {
+      "cpp14": {
+        "solution": "\n/*\n * Complete the 'countDuplicates' function below.\n * \n * The function is expected to return an LONG INTEGER 2D ARRAY.\n * The function accepts STRING 2D ARRAY notificationIds as parameter.\n * \n */\n\nvector<vector<long>> countDuplicates(vector<vector<string>> notificationIds) {\n\t// Write your code here\n\t\n\t\n\t\n}\n",
+        "solution_type": "User-Modified"
+      }
+    }
+  },
+  "generate_solution": {
+    "languages": [
+      "cpp",
+      "java21",
+      "java7",
+      "python3",
+      "typescript"
+    ]
+  }
+}
