@@ -56,21 +56,32 @@ def generate_ai_solutions(handler: ContentCreatorResponseHandler, slug: str, use
 
 
 def add_testcases_and_pass_sanity_check(
-    handler: ContentCreatorResponseHandler, slug: str, username: str
+    handler: ContentCreatorResponseHandler, slug: str, username: str,
+    payloads: dict = PAYLOADS, sanity_languages: set[str] = SANITY_LANGUAGES,
 ) -> requests.Response:
-    """Creates the testcases, runs the sanity check and asserts every expected check is present and passed."""
-    for testcase in PAYLOADS["testcases"]:
+    """
+    Creates the `payloads` testcases, runs the sanity check and asserts that exactly `sanity_languages` were checked
+    and every check passed all testcases. Defaults to the AI-up problem data.
+    """
+    testcase_count = len(payloads["testcases"])
+    for testcase in payloads["testcases"]:
         handler.create_testcase(slug, username, testcase)
-    assert handler.get_problem_testcases(slug, username).json()["meta"]["total_count"] == TESTCASE_COUNT
+    assert handler.get_problem_testcases(slug, username).json()["meta"]["total_count"] == testcase_count
 
-    response = handler.start_sanity_check(slug, username, PAYLOADS["sockmeta"])
+    response = handler.start_sanity_check(slug, username, payloads["sockmeta"])
     assert response.json()["uid"]
     check = handler.wait_for_sanity_check(slug, username)
     assert check["status"] == "SUC"
-    assert set(check["results"]) == SANITY_LANGUAGES
-    assert check["num_checks_total"] == check["num_checks_passed"] == len(SANITY_LANGUAGES)
+    assert set(check["results"]) == sanity_languages
+    assert check["num_checks_total"] == check["num_checks_passed"] == len(sanity_languages)
     assert check["num_checks_failed"] == 0
     for language, result in check["results"].items():
         assert result["status"] == "ACC", language
-        assert result["testcases_passed"] == result["testcases_total"] == TESTCASE_COUNT, language
+        assert result["testcases_passed"] == result["testcases_total"] == testcase_count, language
     return response
+
+
+def publish(handler: ContentCreatorResponseHandler, slug: str, username: str) -> requests.Response:
+    """Makes the problem active, then publishes it (status PUB), as the dashboard's publish step does."""
+    handler.patch_problem(slug, username, {"is_active": True})
+    return handler.post_set_problem_status_reviewer(slug)

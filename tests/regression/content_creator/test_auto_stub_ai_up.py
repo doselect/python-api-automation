@@ -13,6 +13,7 @@ from src.helpers.content_creator.auto_stub_flow import (
     assert_solution_labels,
     assert_stubs_auto_generated,
     generate_ai_solutions,
+    publish,
 )
 from src.reports.report_utils import log_test_summary, summary_row
 from src.responses.content_creator_response_handler import ContentCreatorResponseHandler
@@ -54,8 +55,7 @@ def test_auto_stub_sanity_pass_and_publish(
         f"{TESTCASE_COUNT} testcases, SUC {len(SANITY_LANGUAGES)}/{len(SANITY_LANGUAGES)} passed",
     ))
 
-    handler.patch_problem(slug, CREATOR_USERNAME, {"is_active": True})
-    response = handler.post_set_problem_status_reviewer(slug)
+    response = publish(handler, slug, CREATOR_USERNAME)
     rows.append(summary_row("publish", 202, response, "status PUB"))
 
     response = handler.get_problem(slug, CREATOR_USERNAME)

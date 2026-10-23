@@ -251,6 +251,14 @@ def mcq_bulk_rows() -> list[dict]:
         return [row for row in csv.DictReader(file) if row["Name (min 6 char)"].strip()]
 
 
+def manual_language_payloads() -> dict:
+    """
+    Bodies for a V2 problem with only Manual (non auto-generation) languages — Assembler, Bash, Clojure, Swift, Rust:
+    Default stubs, an edited Assembler stub, an Assembler sample solution, testcases — captured from d6.
+    """
+    return _load_data("manual_language_problem.json")
+
+
 def testcase_payload(testcase: dict, problem_slug: str, username: str) -> dict:
     """POST /api/v1/problemtestcase body: the captured name/input/output/weight/is_sample plus ownership links."""
     return {
